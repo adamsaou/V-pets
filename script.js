@@ -46,6 +46,16 @@ const RANDOM_EVENTS = [
         description: 'Your pet discovered a new toy!',
         reward: () => { addToInventory('toy', 1); }
     }
+    {
+        title: 'Special "sweet" find!',
+        description: 'Your pet found a candy!',
+        reward: () => { addToInventory('candy', 1); }
+    }
+    {
+        title: 'Recovery time!',
+        description: 'Your pet found a medicine, lucky!',
+        reward: () => { addToInventory('medicine', 1); }
+    }
 ];
 
 // Pet emojis
