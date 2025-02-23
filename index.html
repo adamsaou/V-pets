@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Pet Sanctuary</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="pet-selection" class="pet-selection">
+        <h1 class="game-title">Virtual Pet Sanctuary</h1>
+        <div class="pets-grid">
+            <div class="pet-option" data-pet="cat">
+                <div class="pet-icon">🐱</div>
+                <span class="pet-name">Cat</span>
+            </div>
+            <div class="pet-option" data-pet="dog">
+                <div class="pet-icon">🐕</div>
+                <span class="pet-name">Dog</span>
+            </div>
+            <div class="pet-option" data-pet="rabbit">
+                <div class="pet-icon">🐰</div>
+                <span class="pet-name">Rabbit</span>
+            </div>
+            <div class="pet-option" data-pet="hamster">
+                <div class="pet-icon">🐹</div>
+                <span class="pet-name">Hamster</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-container" class="game-container hidden">
+        <!-- Currency Display -->
+        <div class="currency-display">
+            <span>🪙 Coins: </span>
+            <span id="coins">0</span>
+        </div>
+        <!-- Item Shop -->
+<h2>Item Shop</h2>
+<div id="shop">
+    <button onclick="buyItem('Food', 30)">🍖 Food (30 coins)</button>
+    <button onclick="buyItem('Toy', 50)">🧸 Toy (50 coins)</button>
+    <button onclick="buyItem('Medicine', 70)">💊 Medicine (70 coins)</button>
+</div>
+
+<!-- Inventory Grid -->
+<h2>Your Inventory</h2>
+<div id="inventory" class="grid"></div>
+
+<!-- Upgrade Inventory -->
+<button id="upgradeBtn" onclick="upgradeInventory()">Upgrade Inventory (100 coins)</button>
+<p>Inventory Limit: <span id="inventoryLimit">4</span></p>
+
+        <!-- Left Section -->
+        <div class="section left-section">
+            <h1 class="sanctuary-name">Pet Sanctuary</h1>
+            <div class="pet-status">
+                <span id="pet-name" class="pet-name-display"></span>
+                <div class="level-display">Level: <span id="pet-level">1</span></div>
+                <div class="mood-display">
+                    Mood: <span id="mood-icon">😊</span>
+                    <span id="mood-name">Happy</span>
+                    <div id="mood-effects" class="mood-effects"></div>
+                </div>
+            </div>
+            <div class="pet-container">
+                <div id="pet-display" class="pet-display"></div>
+            </div>
+        </div>
+
+        <!-- Middle Section -->
+        <div class="section middle-section">
+            <div class="menu-buttons">
+                <button class="menu-button" id="inventory-button">Inventory</button>
+                <button class="menu-button">Stats</button>
+            </div>
+            <div class="news-ticker" id="news-ticker">
+                Your pet looks at you with loving eyes.
+            </div>
+            <div class="stats-container">
+                <div class="stat-bar">
+                    <div class="stat-label">Hunger</div>
+                    <div class="stat-progress">
+                        <div id="hunger-bar" class="progress-bar"></div>
+                    </div>
+                    <div class="stat-value"><span id="hunger-value">50</span>%</div>
+                </div>
+                <div class="stat-bar">
+                    <div class="stat-label">Health</div>
+                    <div class="stat-progress">
+                        <div id="health-bar" class="progress-bar"></div>
+                    </div>
+                    <div class="stat-value"><span id="health-value">100</span>%</div>
+                </div>
+                <div class="stat-bar">
+                    <div class="stat-label">Happiness</div>
+                    <div class="stat-progress">
+                        <div id="happiness-bar" class="progress-bar"></div>
+                    </div>
+                    <div class="stat-value"><span id="happiness-value">75</span>%</div>
+                </div>
+            </div>
+
+            <!-- Random Event Display -->
+            <div id="random-event" class="random-event hidden">
+                <div class="event-content">
+                    <h3 id="event-title">Special Event!</h3>
+                    <p id="event-description"></p>
+                    <button id="event-button">Collect</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="section right-section">
+            <div class="store-header">Actions</div>
+            <div class="store-container">
+                <div class="store-item" data-action="feed">
+                    <div class="item-info">
+                        <span class="item-name">Feed Pet</span>
+                        <span class="item-description">Reduces hunger by 15%</span>
+                    </div>
+                    <div class="cooldown-timer"></div>
+                </div>
+                <div class="store-item" data-action="play">
+                    <div class="item-info">
+                        <span class="item-name">Play Time</span>
+                        <span class="item-description">Increases happiness by 20%</span>
+                    </div>
+                    <div class="cooldown-timer"></div>
+                </div>
+                <div class="store-item" data-action="rest">
+                    <div class="item-info">
+                        <span class="item-name">Rest</span>
+                        <span class="item-description">Restores health by 15%</span>
+                    </div>
+                    <div class="cooldown-timer"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inventory Panel -->
+        <div id="inventory-panel" class="inventory-panel hidden">
+            <div class="inventory-header">
+                <h2>Inventory</h2>
+                <button id="close-inventory">×</button>
+            </div>
+            <div id="inventory-grid" class="inventory-grid">
+                <!-- Inventory items will be added here dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <div id="game-over" class="game-over hidden">
+        <div class="game-over-content">
+            <h2>Game Over</h2>
+            <p id="game-over-message"></p>
+            <button id="restart-button">Start New Game</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
