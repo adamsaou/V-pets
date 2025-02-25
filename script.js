@@ -1,8 +1,9 @@
 // Game state
 let selectedPet = null;
 let gameOver = false;
-let coins = 0;
+let coins = 100; // Starting coins for testing
 let inventory = [];
+let inventoryLimit = 4; // Starting inventory limit
 let currentMood = 'happy';
 
 let stats = {
@@ -24,10 +25,9 @@ const MOOD_STATES = {
 };
 
 const ITEMS = {
-    apple: { icon: '🍎', name: 'Apple', effects: { hunger: -10, health: 5 } },
-    candy: { icon: '🍬', name: 'Candy', effects: { happiness: 15, hunger: -5 } },
-    medicine: { icon: '💊', name: 'Medicine', effects: { health: 20 } },
-    toy: { icon: '🎾', name: 'Toy', effects: { happiness: 20 } }
+    food: { icon: '🍖', name: 'Food', price: 30, effects: { hunger: -15 } },
+    toy: { icon: '🧸', name: 'Toy', price: 50, effects: { happiness: 20 } },
+    medicine: { icon: '💊', name: 'Medicine', price: 70, effects: { health: 20 } }
 };
 
 const RANDOM_EVENTS = [
@@ -39,22 +39,12 @@ const RANDOM_EVENTS = [
     {
         title: 'Special Treat!',
         description: 'A magical apple appeared!',
-        reward: () => { addToInventory('apple', 1); }
+        reward: () => { addToInventory('food', 1); }
     },
     {
         title: 'Toy Discovery!',
         description: 'Your pet discovered a new toy!',
         reward: () => { addToInventory('toy', 1); }
-    }
-    {
-        title: 'Special "sweet" find!',
-        description: 'Your pet found a candy!',
-        reward: () => { addToInventory('candy', 1); }
-    }
-    {
-        title: 'Recovery time!',
-        description: 'Your pet found a medicine, lucky!',
-        reward: () => { addToInventory('medicine', 1); }
     }
 ];
 
@@ -96,6 +86,8 @@ const moodName = document.getElementById('mood-name');
 const moodEffects = document.getElementById('mood-effects');
 const randomEventDisplay = document.getElementById('random-event');
 const eventButton = document.getElementById('event-button');
+const inventoryLimitDisplay = document.getElementById('inventoryLimit');
+const upgradeBtn = document.getElementById('upgradeBtn');
 
 // Initialize pet selection
 petOptions.forEach(option => {
@@ -105,8 +97,23 @@ petOptions.forEach(option => {
     });
 });
 
+// Shop functionality
+function buyItem(itemId, price) {
+    if (coins >= price) {
+        addCoins(-price);
+        addToInventory(itemId, 1);
+    } else {
+        alert('Not enough coins!');
+    }
+}
+
 // Inventory management
 function addToInventory(itemId, quantity = 1) {
+    if (inventory.length >= inventoryLimit) {
+        alert('Inventory full! Upgrade your inventory to hold more items.');
+        return;
+    }
+
     const existingItem = inventory.find(item => item.id === itemId);
     if (existingItem) {
         existingItem.quantity += quantity;
@@ -160,6 +167,20 @@ function updateInventoryDisplay() {
         itemElement.addEventListener('click', () => useItem(item.id));
         inventoryGrid.appendChild(itemElement);
     });
+}
+
+// Upgrade inventory
+function upgradeInventory() {
+    const upgradeCost = 100;
+    if (coins >= upgradeCost) {
+        coins -= upgradeCost;
+        inventoryLimit += 4;
+        inventoryLimitDisplay.textContent = inventoryLimit;
+        coinsDisplay.textContent = coins;
+        alert('Inventory upgraded!');
+    } else {
+        alert('Not enough coins to upgrade!');
+    }
 }
 
 // Currency system
@@ -222,7 +243,7 @@ function startGame() {
     petNameDisplay.textContent = selectedPet.charAt(0).toUpperCase() + selectedPet.slice(1);
 
     // Initial inventory
-    addToInventory('apple', 2);
+    addToInventory('food', 2);
     addToInventory('toy', 1);
 
     updateDisplay();
@@ -260,10 +281,10 @@ function startGameLoop() {
         const moodState = MOOD_STATES[currentMood];
         const moodEffects = moodState.effects;
 
-        // Update stats with mood effects
-        stats.hunger = Math.min(stats.hunger + 2 * (moodEffects.hunger || 1), 100);
+        // Update stats with mood effects (nerfed hunger decay)
+        stats.hunger = Math.min(stats.hunger + 1 * (moodEffects.hunger || 1), 100); // Nerfed hunger decay
         stats.health = Math.max(stats.health - 1 * (1 / (moodEffects.health || 1)), 0);
-        stats.happiness = Math.max(stats.happiness - 1.5 * (1 / (moodEffects.happiness || 1)), 0);
+        stats.happiness = Math.max(stats.happiness - 1 * (1 / (moodEffects.happiness || 1)), 0);
 
         // Check game over conditions
         if (stats.hunger >= 100 || stats.health <= 0 || stats.happiness <= 0) {
@@ -397,10 +418,36 @@ document.getElementById('restart-button').addEventListener('click', () => {
     };
     level = 1;
     experience = 0;
-    coins = 0;
+    coins = 100; // Reset coins
     inventory = [];
+    inventoryLimit = 4; // Reset inventory limit
     currentMood = 'happy';
     gameOverScreen.classList.add('hidden');
     petSelection.classList.remove('hidden');
     gameContainer.classList.add('hidden');
+    inventoryLimitDisplay.textContent = inventoryLimit;
+});
+
+// Dark/Light mode toggle
+const themeToggle = document.createElement('button');
+themeToggle.textContent = '🌙 Toggle Theme';
+themeToggle.style.position = 'fixed';
+themeToggle.style.bottom = '20px';
+themeToggle.style.right = '20px';
+themeToggle.style.padding = '10px 20px';
+themeToggle.style.backgroundColor = '#333';
+themeToggle.style.color = '#fff';
+themeToggle.style.border = 'none';
+themeToggle.style.borderRadius = '5px';
+themeToggle.style.cursor = 'pointer';
+themeToggle.style.zIndex = '1000';
+document.body.appendChild(themeToggle);
+
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+    if (document.body.classList.contains('light-mode')) {
+        themeToggle.textContent = '🌞 Toggle Theme';
+    } else {
+        themeToggle.textContent = '🌙 Toggle Theme';
+    }
 });
