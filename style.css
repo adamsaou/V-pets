@@ -452,3 +452,39 @@ body {
 #restart-button:hover {
     background: #5a5a5a;
 }
+
+/* Light mode */
+body.light-mode {
+    background: #f4f4f4;
+    color: #333;
+}
+
+body.light-mode .pet-selection {
+    background: linear-gradient(to bottom, #a8d5e2, #6ba8bf);
+}
+
+body.light-mode .game-container {
+    background: linear-gradient(to bottom, #a8d5e2, #6ba8bf);
+}
+
+body.light-mode .store-item {
+    background: rgba(255, 255, 255, 0.8);
+    color: #333;
+}
+
+body.light-mode .store-item:hover {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+body.light-mode .inventory-panel {
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+}
+
+body.light-mode .inventory-item {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .inventory-item:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
