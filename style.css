@@ -488,3 +488,74 @@ body.light-mode .inventory-item {
 body.light-mode .inventory-item:hover {
     background: rgba(0, 0, 0, 0.2);
 }
+/* Shop Buttons */
+#shop button {
+    padding: 10px 20px;
+    margin: 5px;
+    background: #4CAF50; /* Green background */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+#shop button:hover {
+    background: #45a049; /* Darker green on hover */
+    transform: translateY(-2px);
+}
+
+#shop button:active {
+    transform: translateY(0);
+}
+
+/* Upgrade Inventory Button */
+#upgradeBtn {
+    padding: 10px 20px;
+    margin: 10px 0;
+    background: #ff9800; /* Orange background */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+#upgradeBtn:hover {
+    background: #e68900; /* Darker orange on hover */
+    transform: translateY(-2px);
+}
+
+#upgradeBtn:active {
+    transform: translateY(0);
+}
+
+#upgradeBtn:disabled {
+    background: #ccc; /* Gray when disabled */
+    cursor: not-allowed;
+}
+
+/* Light Mode Adjustments */
+body.light-mode #shop button {
+    background: #4CAF50; /* Keep green in light mode */
+    color: white;
+}
+
+body.light-mode #shop button:hover {
+    background: #45a049; /* Darker green in light mode */
+}
+
+body.light-mode #upgradeBtn {
+    background: #ff9800; /* Keep orange in light mode */
+    color: white;
+}
+
+body.light-mode #upgradeBtn:hover {
+    background: #e68900; /* Darker orange in light mode */
+}
+
+body.light-mode #upgradeBtn:disabled {
+    background: #ccc; /* Gray when disabled in light mode */
+}
