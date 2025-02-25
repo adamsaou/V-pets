@@ -114,13 +114,19 @@ function addToInventory(itemId, quantity = 1) {
         return;
     }
 
-    const existingItem = inventory.find(item => item.id === itemId);
+    const item = ITEMS[itemId]; // Get item details from ITEMS object
+    if (!item) {
+        console.error(`Item "${itemId}" not found in ITEMS object.`);
+        return;
+    }
+
+    const existingItem = inventory.find(i => i.id === itemId);
     if (existingItem) {
         existingItem.quantity += quantity;
     } else {
         inventory.push({
             id: itemId,
-            ...ITEMS[itemId],
+            ...item, // Spread item details (icon, name, effects)
             quantity: quantity
         });
     }
