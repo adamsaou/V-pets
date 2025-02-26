@@ -35,21 +35,6 @@
             <span>🪙 Coins: </span>
             <span id="coins">0</span>
         </div>
-        <!-- Item Shop -->
-<h2>Item Shop</h2>
-<div id="shop">
-    <button onclick="buyItem('food', 30)">🍖 Food (30 coins)</button>
-    <button onclick="buyItem('toy', 50)">🧸 Toy (50 coins)</button>
-    <button onclick="buyItem('medicine', 70)">💊 Medicine (70 coins)</button>
-</div>
-
-<!-- Inventory Grid -->
-<h2>Your Inventory</h2>
-<div id="inventory" class="grid"></div>
-
-<!-- Upgrade Inventory -->
-<button id="upgradeBtn" onclick="upgradeInventory()">Upgrade Inventory (100 coins)</button>
-<p>Inventory Limit: <span id="inventoryLimit">4</span></p>
 
         <!-- Left Section -->
         <div class="section left-section">
@@ -111,30 +96,18 @@
             </div>
         </div>
 
-        <!-- Right Section -->
+        <!-- Right Section (Shop Panel) -->
         <div class="section right-section">
-            <div class="store-header">Actions</div>
-            <div class="store-container">
-                <div class="store-item" data-action="feed">
-                    <div class="item-info">
-                        <span class="item-name">Feed Pet</span>
-                        <span class="item-description">Reduces hunger by 15%</span>
-                    </div>
-                    <div class="cooldown-timer"></div>
+            <div class="shop-panel">
+                <h2>Item Shop</h2>
+                <div id="shop">
+                    <button onclick="buyItem('food', 30)">🍖 Food (30 coins)</button>
+                    <button onclick="buyItem('toy', 50)">🧸 Toy (50 coins)</button>
+                    <button onclick="buyItem('medicine', 70)">💊 Medicine (70 coins)</button>
                 </div>
-                <div class="store-item" data-action="play">
-                    <div class="item-info">
-                        <span class="item-name">Play Time</span>
-                        <span class="item-description">Increases happiness by 20%</span>
-                    </div>
-                    <div class="cooldown-timer"></div>
-                </div>
-                <div class="store-item" data-action="rest">
-                    <div class="item-info">
-                        <span class="item-name">Rest</span>
-                        <span class="item-description">Restores health by 15%</span>
-                    </div>
-                    <div class="cooldown-timer"></div>
+                <div class="upgrade-section">
+                    <button id="upgradeBtn" onclick="upgradeInventory()">Upgrade Inventory (100 coins)</button>
+                    <p>Inventory Limit: <span id="inventoryLimit">4</span></p>
                 </div>
             </div>
         </div>
