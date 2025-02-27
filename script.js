@@ -457,3 +457,12 @@ themeToggle.addEventListener('click', () => {
         themeToggle.textContent = '🌙 Toggle Theme';
     }
 });
+
+// Toggle Shop Panel
+const shopToggle = document.getElementById('shop-toggle');
+const shopPanel = document.getElementById('shop-panel');
+
+shopToggle.addEventListener('click', () => {
+    shopPanel.classList.toggle('open');
+    shopToggle.textContent = shopPanel.classList.contains('open') ? '🛒 Close Shop' : '🛒 Open Shop';
+});
