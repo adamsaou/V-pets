@@ -36,6 +36,9 @@
             <span id="coins">0</span>
         </div>
 
+        <!-- Shop Toggle Button -->
+        <button id="shop-toggle" class="shop-toggle">🛒 Open Shop</button>
+
         <!-- Left Section -->
         <div class="section left-section">
             <h1 class="sanctuary-name">Pet Sanctuary</h1>
@@ -87,27 +90,52 @@
             </div>
 
             <!-- Random Event Display -->
-            <div id="random-event" class="random-event hidden">
-                <div class="event-content">
-                    <h3 id="event-title">Special Event!</h3>
-                    <p id="event-description"></p>
-                    <button id="event-button">Collect</button>
-                </div>
+        <div id="random-event" class="random-event hidden">
+            <div class="event-content">
+                <h3 id="event-title">Special Event!</h3>
+                <p id="event-description"></p>
+                <button id="event-button">Collect</button>
             </div>
         </div>
 
         <!-- Right Section (Shop Panel) -->
+        <div id="shop-panel" class="shop-panel">
+            <h2>Item Shop</h2>
+            <div id="shop">
+                <button onclick="buyItem('food', 30)">🍖 Food (30 coins)</button>
+                <button onclick="buyItem('toy', 50)">🧸 Toy (50 coins)</button>
+                <button onclick="buyItem('medicine', 70)">💊 Medicine (70 coins)</button>
+            </div>
+            <div class="upgrade-section">
+                <button id="upgradeBtn" onclick="upgradeInventory()">Upgrade Inventory (100 coins)</button>
+                <p>Inventory Limit: <span id="inventoryLimit">4</span></p>
+            </div>
+        </div>
+
+        <!-- Right Section (Actions) -->
         <div class="section right-section">
-            <div class="shop-panel">
-                <h2>Item Shop</h2>
-                <div id="shop">
-                    <button onclick="buyItem('food', 30)">🍖 Food (30 coins)</button>
-                    <button onclick="buyItem('toy', 50)">🧸 Toy (50 coins)</button>
-                    <button onclick="buyItem('medicine', 70)">💊 Medicine (70 coins)</button>
+            <div class="store-header">Actions</div>
+            <div class="store-container">
+                <div class="store-item" data-action="feed">
+                    <div class="item-info">
+                        <span class="item-name">Feed Pet</span>
+                        <span class="item-description">Reduces hunger by 15%</span>
+                    </div>
+                    <div class="cooldown-timer"></div>
                 </div>
-                <div class="upgrade-section">
-                    <button id="upgradeBtn" onclick="upgradeInventory()">Upgrade Inventory (100 coins)</button>
-                    <p>Inventory Limit: <span id="inventoryLimit">4</span></p>
+                <div class="store-item" data-action="play">
+                    <div class="item-info">
+                        <span class="item-name">Play Time</span>
+                        <span class="item-description">Increases happiness by 20%</span>
+                    </div>
+                    <div class="cooldown-timer"></div>
+                </div>
+                <div class="store-item" data-action="rest">
+                    <div class="item-info">
+                        <span class="item-name">Rest</span>
+                        <span class="item-description">Restores health by 15%</span>
+                    </div>
+                    <div class="cooldown-timer"></div>
                 </div>
             </div>
         </div>
@@ -135,3 +163,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
